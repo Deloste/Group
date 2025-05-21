@@ -18,7 +18,3 @@ def find_max_reverse_complement(mRNA):
                     max_len = max(max_len, curr_len)
     
     return max_len
-
-# Example test
-test_seq = "ACGUGCCACGAUUCAACGUGGCACAG"  # Contains two segments: AUCG and CGAU
-print(find_max_reverse_complement(test_seq.upper()))  # Output: 4
