@@ -6,7 +6,7 @@ def find_max_reverse_complement(mRNA):
     
     # Generate all possible substring pairs
     for i in range(n):
-        for j in range(i+1, n+1):
+        for j in range(i+1, n+1): 
             # Reverse complement of the current substring
             rc = ''.join([complement[base] for base in mRNA[i:j][::-1]])
             curr_len = j - i
@@ -20,5 +20,5 @@ def find_max_reverse_complement(mRNA):
     return max_len
 
 # Example test
-test_seq = "AUCGCGAUAUCG"  # Contains two segments: AUCG and CGAU
+test_seq = "ACGUGCCACGAUUCAACGUGGCACAG"  # Contains two segments: AUCG and CGAU
 print(find_max_reverse_complement(test_seq.upper()))  # Output: 4
