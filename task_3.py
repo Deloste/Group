@@ -45,21 +45,24 @@ def plot_amino_acid_frequencies(mRNA_sequence):
         print("No amino acids to show — check your sequence?")
         return
     # Plotting
-    sorted_items = sorted(freq.items(), key=lambda x: x[1], reverse=True) # Sort the amino acids by frequency
-    labels, values = zip(*sorted_items) # Unzip the labels and values
-    norm = Normalize(vmin=0, vmax=max(values) or 1) # Normalize the values for color mapping
-    cmap = cm.get_cmap('GnBu') # Choose a colormap
-    colors = [cmap(norm(v)) for v in values] 
+    sorted_items = sorted(freq.items(), key=lambda x: x[1], reverse=True)
+    labels, _ = zip(*sorted_items) 
+    total = sum(freq.values()) 
+    values = [count / total * 100 for _, count in sorted_items]  
+    norm = Normalize(vmin=0, vmax=max(values) or 1)
+    cmap = cm.get_cmap('GnBu')
+    colors = [cmap(norm(v)) for v in values]
+
     plt.figure(figsize=(10, 6))
-    bars = plt.barh(labels, values, color=colors, edgecolor='black') # Horizontal bar chart
+    bars = plt.barh(labels, values, color=colors, edgecolor='black')  
     for bar in bars:
-        width = bar.get_width() 
-        plt.text(width + 0.5, bar.get_y() + bar.get_height()/2, f"{int(width)}", va='center', fontsize=10)
-    plt.xlabel("Count", fontsize=12)
+        width = bar.get_width()
+        plt.text(width + 0.5, bar.get_y() + bar.get_height()/2, f"{width:.1f}%", va='center', fontsize=10) 
+    plt.xlabel("Percentage (%)", fontsize=12)  
     plt.title("Amino Acid Frequency Distribution", fontsize=16, fontweight='bold')
-    plt.gca().invert_yaxis() # Invert y-axis to have the most frequent amino acid on top
-    plt.tight_layout() # Adjust layout to fit labels
-    plt.xlim(0, max(values) + 2) # Add some space to the right of the bars
+    plt.gca().invert_yaxis()
+    plt.tight_layout()
+    plt.xlim(0, max(values) + 2)
     plt.show()
 
 

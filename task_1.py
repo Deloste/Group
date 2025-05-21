@@ -14,7 +14,6 @@ def most_frequent_nucleotide(mRNA_sequence):
     max_count = max(codon_freq.values())
     most_freq_codons = [codon for codon, count in codon_freq.items() if count == max_count]
     DNA_trinucleotides = [codon.replace('U', 'T') for codon in most_freq_codons]
-
     return { "most_frequent_trinucleotides": DNA_trinucleotides, 
             "count": max_count}
 
@@ -27,3 +26,8 @@ if result["most_frequent_trinucleotides"]:
         print(f"{trinucleotide}: {result['count']}")
 else:
     print("No valid codons found before stop codon.")
+
+def read_sequence_txt(filepath):
+    with open(filepath, 'r') as file:
+        sequence = file.read().strip().replace('\n', '')
+    return sequence
