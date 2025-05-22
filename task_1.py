@@ -1,4 +1,41 @@
-"1"
+"""
+pseudocode：
+Function most_frequent_nucleotide with input mRNA_sequence:
+    Initialize stop_codons as a set containing 'UAA', 'UAG', 'UGA'
+    Create an empty dictionary called codon_freq to count occurrences
+    Initialize index to 0
+    
+    While index is less than length of mRNA_sequence:
+        Extract codon from mRNA_sequence starting at index, 3 characters long
+        If codon length is less than 3 OR codon is in stop_codons:
+            Exit loop
+        Else:
+            Increment count for this codon in codon_freq
+            Increase index by 3
+    
+    If codon_freq is empty:
+        Return structure with null trinucleotides and 0 count
+    Else:
+        Find maximum value in codon_freq counts
+        Create list of codons with this maximum count
+        Convert these codons to DNA format by replacing 'U' with 'T'
+        Return structure with DNA trinucleotides list and max count
+
+Test Case:
+    test_seq = "AUGAUGUUCUUCGUAA"
+    result = call most_frequent_nucleotide with test_seq
+    If result contains trinucleotides:
+        Print "Most frequent DNA trinucleotide(s) and frequency:"
+        For each trinucleotide in result's list:
+            Print trinucleotide and its count
+    Else:
+        Print "No valid codons found before stop codon."
+
+Function read_sequence_txt with input filepath:
+    Open file at filepath for reading
+    Read file content, remove whitespace and newline characters
+    Return cleaned sequence as single continuous string
+"""
 from collections import Counter
 
 def most_frequent_nucleotide(mRNA_sequence):
